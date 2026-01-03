@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senha     String
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cliente {
+  id             Int         @id @default(autoincrement())
+  nome           String
+  sexo           String?
+  dataNascimento DateTime?
+  telefone       String?
+  observacoes    String?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  orcamentos     Orcamento[]
+}
+
+model Orcamento {
+  id              Int      @id @default(autoincrement())
+  clienteId       Int
+  descricao       String
+  valorTotal      Decimal
+  status          String   @default("criado")
+  dataCriacao     DateTime @default(now())
+  dataAtualizacao DateTime @updatedAt
+  observacoes     String?
+  cliente         Cliente  @relation(fields: [clienteId], references: [id])
+}
