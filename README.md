@@ -325,7 +325,3 @@ gerenciamentoTatto/
 ├── package.json           # Dependencias e scripts
 └── README.md              # Esta documentacao
 ```
-
-## 📄 Licenca
-
-ISC
